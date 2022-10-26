@@ -1,0 +1,19 @@
+.Weather {
+  border: 5px solid #e7057e;
+  border-radius: 3%;
+  background: linear-gradient(
+    0deg,
+    rgb(247, 247, 247) 23.8%,
+    rgb(252, 221, 221) 92%
+  );
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.Weather .clock {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
