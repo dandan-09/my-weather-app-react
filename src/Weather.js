@@ -86,6 +86,16 @@ export default function Weather() {
           <div className="weather-forecast"></div>
         </li>
       </ul>
+      <p>
+        <a
+          href="https://github.com/dandan-09/my-weather-app-react"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open-source code
+        </a>{" "}
+        by Daniella Gombor
+      </p>
     </div>
   );
 }
