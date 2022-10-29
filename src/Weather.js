@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./Weather.css";
+import FormattedDate from "./FormattedDate";
+import FormattedClock from "./FormattedClock";
 import axios from "axios";
 
 export default function Weather(props) {
@@ -12,7 +14,7 @@ export default function Weather(props) {
       wind: response.data.wind.speed,
       humidity: response.data.temperature.humidity,
       description: response.data.condition.description,
-      date: "Fri, 23 September 2022",
+      date: new Date(response.data.time * 1000),
       iconUrl:
         "https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png",
     });
@@ -22,7 +24,9 @@ export default function Weather(props) {
   if (ready) {
     return (
       <div className="Weather">
-        <p className="clock">22:00</p>
+        <p className="clock mt-3">
+          <FormattedClock date={weatherData.date} />
+        </p>
         <div className="row">
           <div className="col-sm-6">
             <form>
@@ -52,14 +56,16 @@ export default function Weather(props) {
         </div>
         <h1>
           <div className="row">
-            <div className="col-4">
+            <div className="col-4 mt-3">
               <span>{weatherData.city}</span>
             </div>
             <div className="col-2">
               <img src={weatherData.iconUrl} alt={weatherData.description} />
             </div>
-            <div className="col-6">
-              <span>{weatherData.date}</span>
+            <div className="col-6 date mt-4">
+              <span>
+                <FormattedDate date={weatherData.date} />
+              </span>
             </div>
           </div>
         </h1>

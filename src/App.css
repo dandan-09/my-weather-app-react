@@ -77,3 +77,7 @@ a {
 .active {
   color: black;
 }
+
+.date {
+  font-size: 30px;
+}
