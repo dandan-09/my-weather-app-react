@@ -15,7 +15,7 @@ export default function Weather() {
     <div className="Weather">
       <p className="clock">22:00</p>
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-sm-6">
           <form>
             <input
               type="text"
@@ -26,14 +26,18 @@ export default function Weather() {
             />
           </form>
         </div>
-        <div className="col-md-3">
+        <div className="col-sm-3">
           <form className="search-button">
-            <input type="submit" value="🔍" />
+            <input type="submit" value="🔍" className="btn btn-light" />
           </form>
         </div>
-        <div className="col-md-3">
+        <div className="col-sm-3">
           <form className="current-location-button">
-            <input type="submit" value="Current Location" />
+            <input
+              type="submit"
+              value="Current Location"
+              className="btn btn-light"
+            />
           </form>
         </div>
       </div>
