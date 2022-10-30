@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./Weather.css";
-import FormattedDate from "./FormattedDate";
 import FormattedClock from "./FormattedClock";
 import axios from "axios";
+import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(props) {
+  const [city, setCity] = useState(props.city);
   const [ready, setReady] = useState(false);
   const [weatherData, setWeatherData] = useState({});
   function handleResponse(response) {
@@ -21,6 +22,21 @@ export default function Weather(props) {
     setReady(true);
   }
 
+  function search() {
+    const apiKey = "39a3b847777o61f5b2409t63bab55fc7";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
   if (ready) {
     return (
       <div className="Weather">
@@ -29,13 +45,14 @@ export default function Weather(props) {
         </p>
         <div className="row">
           <div className="col-sm-6">
-            <form>
+            <form onSubmit={handleSubmit}>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Enter a city"
                 autoFocus="on"
                 autoComplete="off"
+                onChange={handleCityChange}
               />
             </form>
           </div>
@@ -54,77 +71,11 @@ export default function Weather(props) {
             </form>
           </div>
         </div>
-        <h1>
-          <div className="row">
-            <div className="col-4 mt-3">
-              <span>{weatherData.city}</span>
-            </div>
-            <div className="col-2">
-              <img src={weatherData.iconUrl} alt={weatherData.description} />
-            </div>
-            <div className="col-6 date mt-4">
-              <span>
-                <FormattedDate date={weatherData.date} />
-              </span>
-            </div>
-          </div>
-        </h1>
-        <h2>
-          <div className="row">
-            <div className="col-9">
-              <span>{Math.round(weatherData.temperature)}</span>{" "}
-              <a href="/" className="active">
-                °C
-              </a>{" "}
-              | <a href="/">°F</a>
-            </div>
-          </div>
-        </h2>
-        <ul>
-          <li>
-            <div className="row weather-descriptions">
-              <div className="col-4">
-                <span className="currently">Currently: </span>
-                <span className="description text-capitalize">
-                  {weatherData.description}
-                </span>
-              </div>
-              <div className="col-4">
-                <span className="wind-speed-element">Wind speed: </span>
-                <span>
-                  <span className="wind">
-                    {Math.round(weatherData.wind)} km/h
-                  </span>
-                </span>
-              </div>
-              <div className="col-4">
-                <span className="humidity-element">Humidity: </span>
-                <span className="humidity">{weatherData.humidity}%</span>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <div className="weather-forecast"></div>
-          </li>
-        </ul>
-        <p>
-          <a
-            href="https://github.com/dandan-09/my-weather-app-react"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open-source code
-          </a>{" "}
-          by Daniella Gombor
-        </p>
+        <WeatherInfo data={weatherData} />
       </div>
     );
   } else {
-    const apiKey = "39a3b847777o61f5b2409t63bab55fc7";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.city}&key=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
+    search();
     return "Loading...";
   }
 }
