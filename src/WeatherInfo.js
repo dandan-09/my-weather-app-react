@@ -6,13 +6,13 @@ export default function WeatherInfo(props) {
     <div className="WeatherInfo">
       <h1>
         <div className="row">
-          <div className="col-3 mt-3">
+          <div className="col-4 mt-3">
             <span>{props.data.city}</span>
           </div>
           <div className="col-3">
             <img src={props.data.iconUrl} alt={props.data.description} />
           </div>
-          <div className="col-6 date mt-4">
+          <div className="col-5 date mt-4">
             <span>
               <FormattedDate date={props.data.date} />
             </span>
