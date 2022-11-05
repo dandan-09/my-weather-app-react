@@ -17,6 +17,7 @@ export default function Weather(props) {
       humidity: response.data.temperature.humidity,
       description: response.data.condition.description,
       date: new Date(response.data.time * 1000),
+      coordinates: response.data.coordinates,
       iconUrl: `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
     });
     setReady(true);
@@ -73,7 +74,7 @@ export default function Weather(props) {
             </div>
           </div>
           <WeatherInfo data={weatherData} />
-          <WeatherForecast />
+          <WeatherForecast coordinates={weatherData.coordinates} />
         </div>
         <p>
           <a
