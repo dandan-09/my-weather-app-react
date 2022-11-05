@@ -81,3 +81,7 @@ a {
 .date {
   font-size: 30px;
 }
+
+.WeatherInfo-icon {
+  width: 110px;
+}

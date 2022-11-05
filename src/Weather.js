@@ -3,6 +3,7 @@ import "./Weather.css";
 import FormattedClock from "./FormattedClock";
 import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
+import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.city);
@@ -38,39 +39,52 @@ export default function Weather(props) {
 
   if (ready) {
     return (
-      <div className="Weather">
-        <p className="clock mt-3">
-          <FormattedClock date={weatherData.date} />
-        </p>
-        <div className="row">
-          <div className="col-sm-6">
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter a city"
-                autoFocus="on"
-                autoComplete="off"
-                onChange={handleCityChange}
-              />
-            </form>
+      <div>
+        <div className="Weather mt-2">
+          <p className="clock mt-2 mb-2">
+            <FormattedClock date={weatherData.date} />
+          </p>
+          <div className="row">
+            <div className="col-sm-6">
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter a city"
+                  autoFocus="on"
+                  autoComplete="off"
+                  onChange={handleCityChange}
+                />
+              </form>
+            </div>
+            <div className="col-sm-3">
+              <form className="search-button">
+                <input type="submit" value="🔍" className="btn btn-light" />
+              </form>
+            </div>
+            <div className="col-sm-3">
+              <form className="current-location-button">
+                <input
+                  type="submit"
+                  value="Current Location"
+                  className="btn btn-light"
+                />
+              </form>
+            </div>
           </div>
-          <div className="col-sm-3">
-            <form className="search-button">
-              <input type="submit" value="🔍" className="btn btn-light" />
-            </form>
-          </div>
-          <div className="col-sm-3">
-            <form className="current-location-button">
-              <input
-                type="submit"
-                value="Current Location"
-                className="btn btn-light"
-              />
-            </form>
-          </div>
+          <WeatherInfo data={weatherData} />
+          <WeatherForecast />
         </div>
-        <WeatherInfo data={weatherData} />
+        <p>
+          <a
+            href="https://github.com/dandan-09/my-weather-app-react"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open-source code
+          </a>{" "}
+          by Daniella Gombor
+        </p>
       </div>
     );
   } else {
