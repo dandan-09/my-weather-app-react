@@ -60,15 +60,11 @@ export default function Weather(props) {
             </div>
             <div className="col-sm-3">
               <form className="search-button">
-                <input type="submit" value="🔍" className="btn btn-light" />
-              </form>
-            </div>
-            <div className="col-sm-3">
-              <form className="current-location-button">
                 <input
                   type="submit"
-                  value="Current Location"
+                  value="🔍"
                   className="btn btn-light"
+                  onClick={handleSubmit}
                 />
               </form>
             </div>
